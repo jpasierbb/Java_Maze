@@ -1,2 +1,4 @@
-package maze;public class Node {
+package maze;
+
+public class Node {
 }

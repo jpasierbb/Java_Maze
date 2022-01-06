@@ -1,2 +1,4 @@
-package maze;public class wrongDifficultyException {
+package maze;
+
+public class WrongDifficultyException extends Exception{
 }
