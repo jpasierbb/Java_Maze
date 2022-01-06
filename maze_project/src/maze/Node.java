@@ -6,18 +6,20 @@ class Node<I>{
     private Node<I> rightNext;
     private Node<I> leftNext;
 
-    private I value;
+    private boolean upWall;
+    private boolean downWall;
+    private boolean rightWall;
+    private boolean leftWall;
 
     public Node(I value) {
-        this.value = value;
         this.downNext = null;
         this.leftNext = null;
         this.upNext = null;
         this.rightNext = null;
-    }
-
-    public I getValue() {
-        return value;
+        this.upWall = true;
+        this.downWall = true;
+        this.rightWall = true;
+        this.leftWall = true;
     }
 
     public Node<I> getUpNext() {
@@ -50,5 +52,47 @@ class Node<I>{
 
     public void setLeftNext(Node<I> leftNext) {
         this.leftNext = leftNext;
+    }
+
+    public boolean isUpWall() {
+        return upWall;
+    }
+
+    public void setUpWall(boolean upWall) {
+        this.upWall = upWall;
+    }
+
+    public boolean isDownWall() {
+        return downWall;
+    }
+
+    public void setDownWall(boolean downWall) {
+        this.downWall = downWall;
+    }
+
+    public boolean isRightWall() {
+        return rightWall;
+    }
+
+    public void setRightWall(boolean rightWall) {
+        this.rightWall = rightWall;
+    }
+
+    public boolean isLeftWall() {
+        return leftWall;
+    }
+
+    public void setLeftWall(boolean leftWall) {
+        this.leftWall = leftWall;
+    }
+
+    @Override
+    public String toString() {
+        return "Node{" +
+                "upWall=" + upWall +
+                ", downWall=" + downWall +
+                ", rightWall=" + rightWall +
+                ", leftWall=" + leftWall +
+                '}';
     }
 }
