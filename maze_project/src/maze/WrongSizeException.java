@@ -1,6 +1,6 @@
 package maze;
 
-public class WrongSizeException extends Exception{
+public class WrongSizeException extends RuntimeException{
     private int height;
     private int width;
     public WrongSizeException(String message, int width, int height){

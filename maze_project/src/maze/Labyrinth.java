@@ -1,6 +1,5 @@
 package maze;
 
-import java.lang.invoke.WrongMethodTypeException;
 
 public class Labyrinth {
     private int height = 0;
@@ -15,7 +14,7 @@ public class Labyrinth {
      * @param width
      * @param height
      */
-    public Labyrinth(int width, int height) throws WrongSizeException{
+    public Labyrinth(int width, int height){
         if(width<10 || height<10){
             throw new WrongSizeException("Too small size of the Labyrint",width,height);
         }
@@ -50,8 +49,6 @@ public class Labyrinth {
             height = 30;
             width = 30;
         }
-
-
     }
 
 
@@ -88,5 +85,4 @@ public class Labyrinth {
     public void generate(){
 
     }
-
 }

@@ -1,4 +1,4 @@
 package maze;
 
-public class WrongDifficultyException extends Exception{
+public class WrongDifficultyException extends RuntimeException{
 }
