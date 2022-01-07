@@ -1,17 +1,17 @@
 package maze;
 
-class Node<I>{
-    private Node<I> upNext;
-    private Node<I> downNext;
-    private Node<I> rightNext;
-    private Node<I> leftNext;
+class Node{
+    private Node upNext;
+    private Node downNext;
+    private Node rightNext;
+    private Node leftNext;
 
     private boolean upWall;
     private boolean downWall;
     private boolean rightWall;
     private boolean leftWall;
 
-    public Node(I value) {
+    public Node() {
         this.downNext = null;
         this.leftNext = null;
         this.upNext = null;
@@ -22,35 +22,35 @@ class Node<I>{
         this.leftWall = true;
     }
 
-    public Node<I> getUpNext() {
+    public Node getUpNext() {
         return upNext;
     }
 
-    public void setUpNext(Node<I> upNext) {
+    public void setUpNext(Node upNext) {
         this.upNext = upNext;
     }
 
-    public Node<I> getDownNext() {
+    public Node getDownNext() {
         return downNext;
     }
 
-    public void setDownNext(Node<I> downNext) {
+    public void setDownNext(Node downNext) {
         this.downNext = downNext;
     }
 
-    public Node<I> getRightNext() {
+    public Node getRightNext() {
         return rightNext;
     }
 
-    public void setRightNext(Node<I> rightNext) {
+    public void setRightNext(Node rightNext) {
         this.rightNext = rightNext;
     }
 
-    public Node<I> getLeftNext() {
+    public Node getLeftNext() {
         return leftNext;
     }
 
-    public void setLeftNext(Node<I> leftNext) {
+    public void setLeftNext(Node leftNext) {
         this.leftNext = leftNext;
     }
 
