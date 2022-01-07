@@ -1,6 +1,8 @@
 package maze;
 
 
+import java.util.*;
+
 public class Labyrinth {
     private int height = 0;
     private int width = 0;
@@ -30,6 +32,31 @@ public class Labyrinth {
         else{
             difficulty = difficulties[2];
         }
+        baseNode = new Node();
+        /*
+        Generate grid of nodes in loop
+         */
+        Node node = baseNode;
+        Node nextHeightNode = new Node();
+        Node nextWidthNode = new Node();
+        List<Node> nodes = new ArrayList<>();
+        List<Node> nextNodes = new ArrayList<>();
+        nodes.add(baseNode);
+        for(int i=1;i<width;i++){
+            for (int n = 1;n<height;n++){
+                node.setDownNext(nextHeightNode);
+                nextHeightNode.setUpNext(node);
+                if(!nodes.isEmpty()){
+                    Node leftNode = nodes.get(n);
+                    nextHeightNode.setLeftNext(leftNode);
+                    leftNode.setRightNext(nextHeightNode);
+                }
+                nextNodes.add(nextHeightNode);
+            }
+
+
+
+        }
     }
 
     /**
@@ -50,6 +77,7 @@ public class Labyrinth {
             width = 30;
         }
     }
+
 
 
     public int getHeight() {
