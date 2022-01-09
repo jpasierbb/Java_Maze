@@ -39,23 +39,61 @@ public class Labyrinth {
         Node node = baseNode;
         Node nextHeightNode = new Node();
         Node nextWidthNode = new Node();
-        List<Node> nodes = new ArrayList<>();
-        List<Node> nextNodes = new ArrayList<>();
-        nodes.add(baseNode);
-        for(int i=1;i<width;i++){
-            for (int n = 1;n<height;n++){
-                node.setDownNext(nextHeightNode);
-                nextHeightNode.setUpNext(node);
-                if(!nodes.isEmpty()){
-                    Node leftNode = nodes.get(n);
-                    nextHeightNode.setLeftNext(leftNode);
-                    leftNode.setRightNext(nextHeightNode);
+
+        Node[][] Nodes = new Node[width][height];
+
+
+        for(int i = 0; i < width; i++){
+            for(int j = 0; j < height; i++){
+                if(i == 0){
+                    if(j == 0){
+                       Nodes[i][j].setRightNext(Nodes[i+1][j]);
+                       Nodes[i][j].setDownNext(Nodes[i][j+1]);
+                    }
+                    else if(j == height - 1){
+                        Nodes[i][j].setRightNext(Nodes[i+1][j]);
+                        Nodes[i][j].setUpNext(Nodes[i][j-1]);
+                    }
+                    else{
+                        Nodes[i][j].setRightNext(Nodes[i+1][j]);
+                        Nodes[i][j].setUpNext(Nodes[i][j-1]);
+                        Nodes[i][j].setDownNext(Nodes[i][j+1]);
+                    }
                 }
-                nextNodes.add(nextHeightNode);
+                else if(i == width - 1){
+                    if(j == 0){
+                        Nodes[i][j].setLeftNext(Nodes[i-1][j]);
+                        Nodes[i][j].setDownNext(Nodes[i][j+1]);
+                    }
+                    else if(j == height - 1){
+                        Nodes[i][j].setLeftNext(Nodes[i-1][j]);
+                        Nodes[i][j].setUpNext(Nodes[i][j-1]);
+                    }
+                    else{
+                        Nodes[i][j].setLeftNext(Nodes[i-1][j]);
+                        Nodes[i][j].setUpNext(Nodes[i][j-1]);
+                        Nodes[i][j].setDownNext(Nodes[i][j+1]);
+                    }
+                }
+                else{
+                    if(j == 0){
+                        Nodes[i][j].setLeftNext(Nodes[i-1][j]);
+                        Nodes[i][j].setDownNext(Nodes[i][j+1]);
+                        Nodes[i][j].setRightNext(Nodes[i+1][j]);
+                    }
+                    else if(j == height - 1){
+                        Nodes[i][j].setLeftNext(Nodes[i-1][j]);
+                        Nodes[i][j].setUpNext(Nodes[i][j-1]);
+                        Nodes[i][j].setRightNext(Nodes[i+1][j]);
+                    }
+                    else{
+                        Nodes[i][j].setLeftNext(Nodes[i-1][j]);
+                        Nodes[i][j].setUpNext(Nodes[i][j-1]);
+                        Nodes[i][j].setDownNext(Nodes[i][j+1]);
+                        Nodes[i][j].setRightNext(Nodes[i+1][j]);
+                    }
+                }
             }
-
-
-
         }
     }
 
