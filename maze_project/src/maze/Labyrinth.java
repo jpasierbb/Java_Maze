@@ -1,6 +1,7 @@
 package maze;
 
 
+import java.sql.SQLOutput;
 import java.util.*;
 
 public class Labyrinth {
@@ -42,15 +43,21 @@ public class Labyrinth {
 
         Node[][] Nodes = new Node[width][height];
 
+        for(int i = 0; i < width; i++){
+            for(int j = 0; j < height; j++){
+                if(i == 0 && j == 0) Nodes[i][j] = node;
+                else Nodes[i][j] = new Node();
+            }
+        }
 
         for(int i = 0; i < width; i++){
-            for(int j = 0; j < height; i++){
+            for(int j = 0; j < height; j++){
                 if(i == 0){
                     if(j == 0){
                        Nodes[i][j].setRightNext(Nodes[i+1][j]);
                        Nodes[i][j].setDownNext(Nodes[i][j+1]);
                     }
-                    else if(j == height - 1){
+                    else if(j == (height - 1)){
                         Nodes[i][j].setRightNext(Nodes[i+1][j]);
                         Nodes[i][j].setUpNext(Nodes[i][j-1]);
                     }
@@ -60,12 +67,12 @@ public class Labyrinth {
                         Nodes[i][j].setDownNext(Nodes[i][j+1]);
                     }
                 }
-                else if(i == width - 1){
+                else if(i == (width - 1)){
                     if(j == 0){
                         Nodes[i][j].setLeftNext(Nodes[i-1][j]);
                         Nodes[i][j].setDownNext(Nodes[i][j+1]);
                     }
-                    else if(j == height - 1){
+                    else if(j == (height - 1)){
                         Nodes[i][j].setLeftNext(Nodes[i-1][j]);
                         Nodes[i][j].setUpNext(Nodes[i][j-1]);
                     }
@@ -81,7 +88,7 @@ public class Labyrinth {
                         Nodes[i][j].setDownNext(Nodes[i][j+1]);
                         Nodes[i][j].setRightNext(Nodes[i+1][j]);
                     }
-                    else if(j == height - 1){
+                    else if(j == (height - 1)){
                         Nodes[i][j].setLeftNext(Nodes[i-1][j]);
                         Nodes[i][j].setUpNext(Nodes[i][j-1]);
                         Nodes[i][j].setRightNext(Nodes[i+1][j]);
@@ -95,7 +102,9 @@ public class Labyrinth {
                 }
             }
         }
+        //System.out.println(Nodes[0][9].getDownNext());
     }
+
 
     /**
      * Constructor to make the Labyrint with given difficulty. Size is being set according to difficulty.
@@ -115,8 +124,6 @@ public class Labyrinth {
             width = 30;
         }
     }
-
-
 
     public int getHeight() {
         return height;
@@ -150,5 +157,9 @@ public class Labyrinth {
     }
     public void generate(){
 
+    }
+
+    public static void main(String[] args) {
+        Labyrinth L1 = new Labyrinth(10, 10);
     }
 }
