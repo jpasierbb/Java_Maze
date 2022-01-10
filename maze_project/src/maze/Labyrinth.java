@@ -157,8 +157,8 @@ public class Labyrinth {
         return outNote;
     }
     public void generate(){
-
     }
+
 
     public static void main(String[] args) {
         Labyrinth L1 = new Labyrinth(10, 10);
