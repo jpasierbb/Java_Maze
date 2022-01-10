@@ -11,6 +11,9 @@ public class Labyrinth {
     private String[] difficulties = {"hard","medium","easy"}; //Pre-defined difficulties
     private Node baseNode = null;
     private Node outNote = null;
+    public enum Algorithm {
+        RANDOMIZED_DEPTH__FIRST,
+    }
 
     /**
      * Constructor to make the Labyrint with given height and width. Difficulty is being set according to size.
@@ -156,8 +159,60 @@ public class Labyrinth {
     public Node getOutNote() {
         return outNote;
     }
-    public void generate(){
+    public void generate(Algorithm algorithm){
+        switch (algorithm){
+            case RANDOMIZED_DEPTH__FIRST -> rdf_alg();
+        }
+    }
 
+    private void rdf_alg(){
+        Deque<Node> stack = new ArrayDeque<>();
+        Node node = baseNode;
+        Node nextNode = new Node();
+        Random random = new Random();
+        while (true){
+            int num = random.nextInt(0,3);
+            if(num==0){
+                if(node.getUpNext() != null){
+                    nextNode = node.getUpNext();
+                }
+            } else if(num==1){
+                if(node.getRightNext() != null){
+                    nextNode = node.getRightNext();
+                }
+            } else if(num==2){
+                if(node.getDownNext() != null){
+                    nextNode = node.getDownNext();
+                }
+            }
+            else {
+                if(node.getLeftNext() != null){
+                    nextNode = node.getLeftNext();
+                }
+            }
+            if(!stack.contains(nextNode)){
+                if(num==0){
+                    nextNode.setDownWall(false);
+                    node.setUpWall(false);
+                } else if(num==1){
+                    nextNode.setLeftWall(false);
+                    node.setRightWall(false);
+                } else if(num==2) {
+                    nextNode.setUpWall(false);
+                    node.setDownWall(false);
+                }
+                else {
+                    nextNode.setRightWall(false);
+                    node.setLeftWall(false);
+                }
+                stack.addFirst(nextNode);
+                node = nextNode;
+            }
+            else {
+                node = stack.remove();
+            }
+
+        }
     }
 
     public static void main(String[] args) {
