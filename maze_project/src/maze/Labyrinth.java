@@ -33,14 +33,35 @@ public class Labyrinth {
         else{
             difficulty = difficulties[2];
         }
-        baseNode = new Node();
-        /*
-        Generate grid of nodes in loop
-         */
-        Node node = baseNode;
-        Node nextHeightNode = new Node();
-        Node nextWidthNode = new Node();
+        generateGrid();
+    }
 
+
+    /**
+     * Constructor to make the Labyrint with given difficulty. Size is being set according to difficulty.
+     * @param difficulty
+     */
+    public Labyrinth(String difficulty){
+        if(difficulty.equals(difficulties[0])){
+            height = 100;
+            width = 100;
+        }
+        else if(difficulty.equals(difficulties[1])){
+            height = 50;
+            width = 50;
+        }
+        else if(difficulty.equals(difficulties[2])){
+            height = 30;
+            width = 30;
+        }
+        generateGrid();
+    }
+    private void generateGrid(){
+        if(height<10 || width<10){
+            throw new WrongSizeException("Too small size of the Labyrint",width,height);
+        }
+        baseNode = new Node();
+        Node node = baseNode;
         Node[][] Nodes = new Node[width][height];
 
         for(int i = 0; i < width; i++){
@@ -49,13 +70,12 @@ public class Labyrinth {
                 else Nodes[i][j] = new Node();
             }
         }
-
         for(int i = 0; i < width; i++){
             for(int j = 0; j < height; j++){
                 if(i == 0){
                     if(j == 0){
-                       Nodes[i][j].setRightNext(Nodes[i+1][j]);
-                       Nodes[i][j].setDownNext(Nodes[i][j+1]);
+                        Nodes[i][j].setRightNext(Nodes[i+1][j]);
+                        Nodes[i][j].setDownNext(Nodes[i][j+1]);
                     }
                     else if(j == (height - 1)){
                         Nodes[i][j].setRightNext(Nodes[i+1][j]);
@@ -102,28 +122,9 @@ public class Labyrinth {
                 }
             }
         }
-        //System.out.println(Nodes[0][9].getDownNext());
     }
 
 
-    /**
-     * Constructor to make the Labyrint with given difficulty. Size is being set according to difficulty.
-     * @param difficulty
-     */
-    public Labyrinth(String difficulty){
-        if(difficulty.equals(difficulties[0])){
-            height = 100;
-            width = 100;
-        }
-        else if(difficulty.equals(difficulties[1])){
-            height = 50;
-            width = 50;
-        }
-        else if(difficulty.equals(difficulties[2])){
-            height = 30;
-            width = 30;
-        }
-    }
 
     public int getHeight() {
         return height;
@@ -161,5 +162,6 @@ public class Labyrinth {
 
     public static void main(String[] args) {
         Labyrinth L1 = new Labyrinth(10, 10);
+        Labyrinth L2 = new Labyrinth("hard");
     }
 }
