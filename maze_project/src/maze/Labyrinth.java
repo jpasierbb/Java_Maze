@@ -164,7 +164,7 @@ public class Labyrinth {
             case RANDOMIZED_DEPTH__FIRST -> rdf_alg();
         }
     }
-
+    // Raczej idziemy w strone klasy zagniezdzonej generator z wlasnym stackiem i wywolaniem rekurencyjnym algorytmu
     private void rdf_alg(){
         Deque<Node> stack = new ArrayDeque<>();
         Node node = baseNode;
@@ -218,5 +218,6 @@ public class Labyrinth {
     public static void main(String[] args) {
         Labyrinth L1 = new Labyrinth(10, 10);
         Labyrinth L2 = new Labyrinth("hard");
+        L2.generate(Algorithm.RANDOMIZED_DEPTH__FIRST);
     }
 }
