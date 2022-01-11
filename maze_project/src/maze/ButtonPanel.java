@@ -4,45 +4,50 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
+import javax.swing.*;
+
+import static java.lang.System.exit;
 
 public class ButtonPanel extends JPanel implements ActionListener{
 
-    public static final int HEIGHT = 100;
-    public static final int WIDTH = 300;
-    private JButton generate;
-    private JButton load;
-    private JButton exit;
+    public static final int HEIGHT = 300;
+    public static final int WIDTH = 500;
+    JButton bGenerate, bLoad, bExit;
 
     public ButtonPanel() {
-        generate = new JButton("Generate MAZE");
-        load = new JButton("Load MAZE");
-        exit = new JButton("Exit");
+        bGenerate = new JButton("Generate MAZE");
+        bLoad = new JButton("Load MAZE");
+        bExit = new JButton("Exit");
 
-        generate.addActionListener(this);
-        load.addActionListener(this);
-        exit.addActionListener(this);
+        bGenerate.addActionListener(this);
+        bLoad.addActionListener(this);
+        bExit.addActionListener(this);
 
         setLayout(new FlowLayout());
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
-        add(generate);
-        add(load);
-        add(exit);
+        add(bGenerate);
+        add(bLoad);
+        add(bExit);
     }
 
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
 
-        if(source == generate)
+        if (source == bGenerate) {
             // metoda generująca labirynt
-            System.out.println("generowanie labiryntu");
-
-        else if(source == load)
+            System.out.println("Generowanie labiryntu...");
+            Labyrinth L1 = new Labyrinth(10, 10);
+            L1.toString();
+            System.out.println("\n");
+        }
+        else if (source == bLoad) {
             // metoda wczytująca labirynt
-            System.out.println("wczytywanie labiryntu");
-        else if(source == exit)
+            System.out.println("Wczytywanie labiryntu...");
+        }
+        else if (source == bExit) {
             // metoda kończąca działanie programu
-            System.out.println("wyjście z programu");
+            System.out.println("Wyjście z programu.");
+            exit(0);
+        }
     }
 }

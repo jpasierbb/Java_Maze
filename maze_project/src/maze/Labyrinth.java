@@ -11,6 +11,7 @@ public class Labyrinth {
     private String[] difficulties = {"hard","medium","easy"}; //Pre-defined difficulties
     private Node baseNode = null;
     private Node outNote = null;
+    private Node[][] nodesToString;
 
     /**
      * Constructor to make the Labyrint with given height and width. Difficulty is being set according to size.
@@ -56,7 +57,7 @@ public class Labyrinth {
         }
         generateGrid();
     }
-    private void generateGrid(){
+    private Node[][]  generateGrid(){
         if(height<10 || width<10){
             throw new WrongSizeException("Too small size of the Labyrint",width,height);
         }
@@ -122,9 +123,33 @@ public class Labyrinth {
                 }
             }
         }
+        //Nodes[7][8].setDownWall(false);
+        return nodesToString = Nodes;
     }
 
-
+    @Override
+    public String toString() {
+        for(int i = 0; i < width + 2; i++){
+            System.out.print("# ");
+        }
+        System.out.print("\n");
+        for(Node rows[]:nodesToString){
+            System.out.print("# ");
+            for(Node wall: rows){
+                int x;
+                if(!wall.isDownWall() || !wall.isLeftWall() || !wall.isUpWall() || !wall.isRightWall()) x = 1;
+                else x = 0;
+                System.out.print(x);
+                System.out.print(" ");
+            }
+            System.out.print("#");
+            System.out.print("\n");
+        }
+        for(int i = 0; i < width + 2; i++){
+            System.out.print("# ");
+        }
+        return "";
+    }
 
     public int getHeight() {
         return height;
@@ -157,11 +182,12 @@ public class Labyrinth {
         return outNote;
     }
     public void generate(){
-
     }
+
 
     public static void main(String[] args) {
         Labyrinth L1 = new Labyrinth(10, 10);
-        Labyrinth L2 = new Labyrinth("hard");
+        //Labyrinth L2 = new Labyrinth("hard");
+        System.out.println(L1);
     }
 }
