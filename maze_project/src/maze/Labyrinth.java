@@ -1,6 +1,7 @@
 package maze;
 
 
+import javax.lang.model.element.UnknownAnnotationValueException;
 import java.sql.SQLOutput;
 import java.util.*;
 
@@ -18,7 +19,13 @@ public class Labyrinth {
     }
     public enum Algorithm {
         RANDOMIZED_DEPTH__FIRST,
-        OTHER_ALG
+        OTHER_ALG;
+        private Deque<Node> stack = new ArrayDeque<>();
+        private void generate(Labyrinth labyrinth){
+            Node node = labyrinth.baseNode;
+
+        }
+
     }
 
     /**
@@ -198,12 +205,14 @@ public class Labyrinth {
         }
     }
     // Raczej idziemy w strone klasy zagniezdzonej generator z wlasnym stackiem i wywolaniem rekurencyjnym algorytmu
-    private void rdf_alg(){
-        }
+    private void rdf_alg() {
+    }
+
 
     public static void main(String[] args) {
         Labyrinth L1 = new Labyrinth(10, 10);
-        //Labyrinth L2 = new Labyrinth("hard");
+        Labyrinth L2 = new Labyrinth(Difficulty.EASY);
+        System.out.println(L2.getHeight());
         System.out.println(L1);
     }
 }
