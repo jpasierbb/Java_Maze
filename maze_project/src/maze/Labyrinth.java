@@ -7,12 +7,17 @@ import java.util.*;
 public class Labyrinth {
     private int height = 0;
     private int width = 0;
-    private String difficulty = "";
-    private String[] difficulties = {"hard","medium","easy"}; //Pre-defined difficulties
+    private Difficulty difficulty;
     private Node baseNode = null;
     private Node outNote = null;
+    public enum Difficulty {
+        HARD,
+        MEDIUM,
+        EASY
+    }
     public enum Algorithm {
         RANDOMIZED_DEPTH__FIRST,
+        OTHER_ALG
     }
 
     /**
@@ -28,13 +33,13 @@ public class Labyrinth {
         this.width = width;
         int size = width*height;
         if(size>100){
-            difficulty = difficulties[0];
+            difficulty = Difficulty.HARD;
         }
         else if(size>50){
-            difficulty = difficulties[1];
+            difficulty = Difficulty.MEDIUM;
         }
         else{
-            difficulty = difficulties[2];
+            difficulty = Difficulty.EASY;
         }
         generateGrid();
     }
@@ -44,18 +49,20 @@ public class Labyrinth {
      * Constructor to make the Labyrint with given difficulty. Size is being set according to difficulty.
      * @param difficulty
      */
-    public Labyrinth(String difficulty){
-        if(difficulty.equals(difficulties[0])){
-            height = 100;
-            width = 100;
-        }
-        else if(difficulty.equals(difficulties[1])){
-            height = 50;
-            width = 50;
-        }
-        else if(difficulty.equals(difficulties[2])){
-            height = 30;
-            width = 30;
+    public Labyrinth(Difficulty difficulty){
+        switch (difficulty){
+            case HARD ->{
+                height=100;
+                width=100;
+            }
+            case MEDIUM -> {
+                height = 50;
+                width = 50;
+            }
+            case EASY -> {
+                height = 30;
+                width = 30;
+            }
         }
         generateGrid();
     }
@@ -145,11 +152,11 @@ public class Labyrinth {
         this.width = width;
     }
 
-    public String getDifficulty() {
+    public Difficulty getDifficulty() {
         return difficulty;
     }
 
-    public void setDifficulty(String difficulty) {
+    public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
     }
 
@@ -166,58 +173,12 @@ public class Labyrinth {
     }
     // Raczej idziemy w strone klasy zagniezdzonej generator z wlasnym stackiem i wywolaniem rekurencyjnym algorytmu
     private void rdf_alg(){
-        Deque<Node> stack = new ArrayDeque<>();
-        Node node = baseNode;
-        Node nextNode = new Node();
-        Random random = new Random();
-        while (true){
-            int num = random.nextInt(0,3);
-            if(num==0){
-                if(node.getUpNext() != null){
-                    nextNode = node.getUpNext();
-                }
-            } else if(num==1){
-                if(node.getRightNext() != null){
-                    nextNode = node.getRightNext();
-                }
-            } else if(num==2){
-                if(node.getDownNext() != null){
-                    nextNode = node.getDownNext();
-                }
-            }
-            else {
-                if(node.getLeftNext() != null){
-                    nextNode = node.getLeftNext();
-                }
-            }
-            if(!stack.contains(nextNode)){
-                if(num==0){
-                    nextNode.setDownWall(false);
-                    node.setUpWall(false);
-                } else if(num==1){
-                    nextNode.setLeftWall(false);
-                    node.setRightWall(false);
-                } else if(num==2) {
-                    nextNode.setUpWall(false);
-                    node.setDownWall(false);
-                }
-                else {
-                    nextNode.setRightWall(false);
-                    node.setLeftWall(false);
-                }
-                stack.addFirst(nextNode);
-                node = nextNode;
-            }
-            else {
-                node = stack.remove();
-            }
-
         }
-    }
 
     public static void main(String[] args) {
         Labyrinth L1 = new Labyrinth(10, 10);
-        Labyrinth L2 = new Labyrinth("hard");
+        Labyrinth L2 = new Labyrinth(Difficulty.HARD);
+        System.out.println(L2.baseNode.getUpNext());
         L2.generate(Algorithm.RANDOMIZED_DEPTH__FIRST);
     }
 }
