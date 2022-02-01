@@ -1,10 +1,11 @@
 package maze;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
-public class GeneratorAldusBroder {
+public class GeneratorAldusBroder implements Serializable {
     private final Labyrinth labyrinth;
     private Set<Node> beenThere;
     private final int size;

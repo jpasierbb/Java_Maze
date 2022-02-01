@@ -1,8 +1,9 @@
 package maze;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class GeneratorDeepFirst {
+public class GeneratorDeepFirst implements Serializable {
     private Labyrinth labyrinth;
     private final Random random = new Random();
     private enum Directions{
