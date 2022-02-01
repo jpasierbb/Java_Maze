@@ -15,6 +15,7 @@ public class Generator {
 
     public Generator(Labyrinth labyrinth){
         this.labyrinth = labyrinth;
+        RDF(this.labyrinth.getBaseNode());
     }
 
     public Labyrinth getLabyrinth() {
@@ -22,16 +23,23 @@ public class Generator {
     }
 
     public void RDF(Node node){
-        List<Directions> directions = Arrays.asList(Directions.values());
+        List<Directions> directions = new ArrayList<>(Arrays.asList(Directions.values()));
         Node nextNode;
+        int x;
         while (true){
-            if(directions.size()==0){
-                if(!stack.isEmpty()){
+            if(directions.size()==0) {
+                if (!stack.isEmpty()) {
                     RDF(stack.pop());
-                }
-                else break;
+                    break;
+                } else break;
             }
-            switch (directions.get(random.nextInt(directions.size()-1))){
+            else if (directions.size()==1){
+                x = 0;
+            }
+            else {
+                x = random.nextInt(directions.size()-1);
+            }
+            switch (directions.get(x)){
                 case UP -> {
                     if(node.getUpNext()!=null && !stack.contains(node.getUpNext()) ){
                         nextNode = node.getUpNext();
@@ -39,6 +47,7 @@ public class Generator {
                         nextNode.setDownWall(false);
                         stack.addFirst(nextNode);
                         RDF(nextNode);
+                        break;
                     }
                     else{
                         directions.remove(Directions.UP);
@@ -51,6 +60,7 @@ public class Generator {
                         nextNode.setUpWall(false);
                         stack.addFirst(nextNode);
                         RDF(nextNode);
+                        break;
                     }
                     else{
                         directions.remove(Directions.DOWN);
@@ -63,6 +73,10 @@ public class Generator {
                         nextNode.setRightWall(false);
                         stack.addFirst(nextNode);
                         RDF(nextNode);
+                        break;
+                    }
+                    else{
+                        directions.remove(Directions.LEFT);
                     }
 
                 }
@@ -73,6 +87,10 @@ public class Generator {
                         nextNode.setLeftWall(false);
                         stack.addFirst(nextNode);
                         RDF(nextNode);
+                        break;
+                    }
+                    else{
+                        directions.remove(Directions.RIGHT);
                     }
 
                 }
@@ -81,5 +99,10 @@ public class Generator {
 
         }
         }
+        public static void main(String[] args){
+            Labyrinth l1 = new Labyrinth(Labyrinth.Difficulty.MEDIUM);
+            Generator generator = new Generator(l1);
+        }
+
     }
 
