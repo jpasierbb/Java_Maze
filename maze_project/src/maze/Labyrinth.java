@@ -1,7 +1,14 @@
 package maze;
 
 
-public class Labyrinth {
+import javax.imageio.plugins.bmp.BMPImageWriteParam;
+import javax.lang.model.element.UnknownAnnotationValueException;
+import java.io.NotSerializableException;
+import java.io.Serializable;
+import java.sql.SQLOutput;
+import java.util.*;
+
+public class Labyrinth implements Serializable {
     private int height = 0;
     private int width = 0;
     private Difficulty difficulty;

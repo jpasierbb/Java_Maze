@@ -1,6 +1,8 @@
 package maze;
 
-class Node{
+import java.io.Serializable;
+
+class Node implements Serializable {
     private Node upNext;
     private Node downNext;
     private Node rightNext;

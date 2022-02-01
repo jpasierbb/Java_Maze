@@ -12,21 +12,27 @@ public class ButtonPanel extends JPanel implements ActionListener{
 
     public static final int HEIGHT = 300;
     public static final int WIDTH = 500;
-    JButton bGenerate, bLoad, bExit;
+    JButton bGenerate, bLoad, bSave, bSolve, bExit;
 
     public ButtonPanel() {
         bGenerate = new JButton("Generate MAZE");
         bLoad = new JButton("Load MAZE");
+        bSave = new JButton(("Save MAZE"));
+        bSolve = new JButton("Solve MAZE");
         bExit = new JButton("Exit");
 
         bGenerate.addActionListener(this);
         bLoad.addActionListener(this);
+        bSave.addActionListener(this);
+        bSolve.addActionListener(this);
         bExit.addActionListener(this);
 
         setLayout(new FlowLayout());
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
         add(bGenerate);
         add(bLoad);
+        add(bSave);
+        add(bSolve);
         add(bExit);
     }
 
@@ -43,6 +49,16 @@ public class ButtonPanel extends JPanel implements ActionListener{
         else if (source == bLoad) {
             // metoda wczytująca labirynt
             System.out.println("Wczytywanie labiryntu...");
+            FileIn f = new FileIn();
+        }
+        else if (source == bSave) {
+            // metoda zapisująca labirynt
+            System.out.println("Zapisywanie labiryntu...");
+
+        }
+        else if (source == bSolve) {
+            // metoda rozwiązująca labirynt
+            System.out.println("Rozwiązywanie labiryntu...");
         }
         else if (source == bExit) {
             // metoda kończąca działanie programu
