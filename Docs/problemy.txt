@@ -2,3 +2,4 @@ Problem ze stack overflow przy rekurencyjnym wywolywaniu funkcji. Wszystkie dekl
 Printowanie w 3 rzedach, wiec petla wywoluje sie 3*H*W
 DeepRecurisve
 Zamiana Stacka na HashSet w celu optymalizaji, oraz braku potrzeby Hashseta
+random.nextInt() lepiej zeby bylo bardzo duzy zakres i modulo.

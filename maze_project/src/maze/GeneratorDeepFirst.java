@@ -2,7 +2,7 @@ package maze;
 
 import java.util.*;
 
-public class Generator {
+public class GeneratorDeepFirst {
     private Labyrinth labyrinth;
     private final Random random = new Random();
     private enum Directions{
@@ -18,7 +18,7 @@ public class Generator {
     private List<Directions> directions = new ArrayList<>();
     private List<Directions> dir = Arrays.asList(Directions.values());
 
-    public Generator(Labyrinth labyrinth){
+    public GeneratorDeepFirst(Labyrinth labyrinth){
         this.labyrinth = labyrinth;
         stack.addFirst(this.labyrinth.getBaseNode());
         RDF(this.labyrinth.getBaseNode());
@@ -29,7 +29,7 @@ public class Generator {
         return labyrinth;
     }
 
-    public void RDF(Node node){
+    private void RDF(Node node){
         directions.removeAll(directions);
         directions.addAll(dir);
         while (true){
@@ -108,8 +108,8 @@ public class Generator {
         }
         public static void main(String[] args){
             Labyrinth l1 = new Labyrinth(Labyrinth.Difficulty.EASY);
-            Generator generator = new Generator(l1);
-            l1 = generator.getLabyrinth();
+            GeneratorDeepFirst generatorDeepFirst = new GeneratorDeepFirst(l1);
+            l1 = generatorDeepFirst.getLabyrinth();
             Labyrinth l2 = new Labyrinth(Labyrinth.Difficulty.MEDIUM);
             System.out.println(l1.getBaseNode());
             System.out.println(l1.getBaseNode().getRightNext());

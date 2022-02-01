@@ -1,11 +1,6 @@
 package maze;
 
 
-import javax.imageio.plugins.bmp.BMPImageWriteParam;
-import javax.lang.model.element.UnknownAnnotationValueException;
-import java.sql.SQLOutput;
-import java.util.*;
-
 public class Labyrinth {
     private int height = 0;
     private int width = 0;
@@ -222,11 +217,13 @@ public class Labyrinth {
 
 
     public static void main(String[] args) {
-        Labyrinth L1 = new Labyrinth(10, 10);
+        Labyrinth L1 = new Labyrinth(6, 6);
         Labyrinth L2 = new Labyrinth(6,6); //Stack overflow >50x50
-        Generator generator = new Generator(L2);
-        L2 = generator.getLabyrinth();
+        GeneratorDeepFirst generatorDeepFirst = new GeneratorDeepFirst(L2);
+        GeneratorAldusBroder generatorAldusBroder = new GeneratorAldusBroder(L1);
+        L2 = generatorDeepFirst.getLabyrinth();
         System.out.println(L2);
-        System.out.print(L2.baseNode.equals(L2.outNote));
+        System.out.print(L1);
+
     }
 }
