@@ -12,9 +12,11 @@ public class Generator {
         RIGHT
     }
     private Deque<Node> stack = new ArrayDeque<>();
-
+    private Deque<Node> beenThere = new ArrayDeque<>();
+    List<Directions> directions = new ArrayList<>();
     public Generator(Labyrinth labyrinth){
         this.labyrinth = labyrinth;
+        stack.addFirst(this.labyrinth.getBaseNode());
         RDF(this.labyrinth.getBaseNode());
     }
 
@@ -23,7 +25,8 @@ public class Generator {
     }
 
     public void RDF(Node node){
-        List<Directions> directions = new ArrayList<>(Arrays.asList(Directions.values()));
+        directions.removeAll(directions);
+        directions.addAll(Arrays.asList(Directions.values()));
         Node nextNode;
         int x;
         while (true){
@@ -41,11 +44,12 @@ public class Generator {
             }
             switch (directions.get(x)){
                 case UP -> {
-                    if(node.getUpNext()!=null && !stack.contains(node.getUpNext()) ){
+                    if(node.getUpNext()!=null && !beenThere.contains(node.getUpNext()) ){
                         nextNode = node.getUpNext();
                         node.setUpWall(false);
                         nextNode.setDownWall(false);
                         stack.addFirst(nextNode);
+                        beenThere.addFirst(nextNode);
                         RDF(nextNode);
                         break;
                     }
@@ -54,11 +58,12 @@ public class Generator {
                     }
                 }
                 case DOWN -> {
-                    if(node.getDownNext()!=null && !stack.contains(node.getDownNext())){
+                    if(node.getDownNext()!=null && !beenThere.contains(node.getDownNext())){
                         nextNode = node.getDownNext();
                         node.setDownWall(false);
                         nextNode.setUpWall(false);
                         stack.addFirst(nextNode);
+                        beenThere.addFirst(nextNode);
                         RDF(nextNode);
                         break;
                     }
@@ -67,11 +72,12 @@ public class Generator {
                     }
                 }
                 case LEFT -> {
-                    if(node.getLeftNext()!=null && !stack.contains(node.getLeftNext())){
+                    if(node.getLeftNext()!=null && !beenThere.contains(node.getLeftNext())){
                         nextNode = node.getLeftNext();
                         node.setLeftWall(false);
                         nextNode.setRightWall(false);
                         stack.addFirst(nextNode);
+                        beenThere.addFirst(nextNode);
                         RDF(nextNode);
                         break;
                     }
@@ -81,11 +87,12 @@ public class Generator {
 
                 }
                 case RIGHT -> {
-                    if(node.getRightNext()!=null && !stack.contains(node.getRightNext())){
+                    if(node.getRightNext()!=null && !beenThere.contains(node.getRightNext())){
                         nextNode = node.getRightNext();
                         node.setRightWall(false);
                         nextNode.setLeftWall(false);
                         stack.addFirst(nextNode);
+                        beenThere.addFirst(nextNode);
                         RDF(nextNode);
                         break;
                     }
@@ -100,8 +107,13 @@ public class Generator {
         }
         }
         public static void main(String[] args){
-            Labyrinth l1 = new Labyrinth(Labyrinth.Difficulty.MEDIUM);
+            Labyrinth l1 = new Labyrinth(Labyrinth.Difficulty.EASY);
             Generator generator = new Generator(l1);
+            l1 = generator.getLabyrinth();
+            System.out.println(l1.getBaseNode());
+            System.out.println(l1.getBaseNode().getRightNext());
+            System.out.println(l1.getBaseNode().getDownNext());
+            System.out.println(l1.getBaseNode().getDownNext().getRightNext());
         }
 
     }
