@@ -115,6 +115,5 @@ public class Generator {
             System.out.println(l1.getBaseNode().getDownNext());
             System.out.println(l1.getBaseNode().getDownNext().getRightNext());
         }
-
     }
 
