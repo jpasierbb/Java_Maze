@@ -7,13 +7,12 @@ import java.io.ObjectOutputStream;
 import java.util.Date;
 
 public class FileOut {
-
-    public static void main (String[] args) {
-        Labyrinth l = new Labyrinth(12,12);
-
+    private Labyrinth lab;
+    private String path= "obiekty.sav";
+    public FileOut(String path) {
         FileOutputStream outputStream = null;
         try {
-            outputStream = new FileOutputStream("obiekt2.sav");
+            outputStream = new FileOutputStream(path);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -23,12 +22,16 @@ public class FileOut {
             p.writeInt(1);
             p.writeObject("Test");
             p.writeObject(new Date());
-            p.writeObject(l);
+            p.writeObject(lab);
             p.flush();
             outputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
         // l.dispose();
+    }
+
+    public Labyrinth getLab() {
+        return lab;
     }
 }

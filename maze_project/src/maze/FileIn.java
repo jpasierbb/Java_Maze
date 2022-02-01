@@ -7,15 +7,16 @@ import java.io.ObjectInputStream;
 import java.util.Date;
 
 public class FileIn {
-
-    public static void main(String[] args) {
+    private Labyrinth lab;
+    private String path = "obiekty.sav";
+    public FileIn(String path) {
         FileInputStream inputStream = null;
         String text = "";
         Date date = null;
         int i=0;
         Labyrinth lab = null;
         try {
-            inputStream = new FileInputStream("obiekt2.sav");
+            inputStream = new FileInputStream(path);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -35,5 +36,9 @@ public class FileIn {
             e.printStackTrace();
         }
         lab.toString();
+    }
+
+    public Labyrinth getLab() {
+        return lab;
     }
 }

@@ -9,8 +9,8 @@ import java.sql.SQLOutput;
 import java.util.*;
 
 public class Labyrinth implements Serializable {
-    private int height = 0;
-    private int width = 0;
+    protected int height = 0;
+    protected int width = 0;
     private Difficulty difficulty;
     protected Node baseNode = null;
     private Node outNote = null;
