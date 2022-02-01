@@ -231,6 +231,9 @@ public class Labyrinth implements Serializable {
         L2 = generatorDeepFirst.getLabyrinth();
         System.out.println(L2);
         System.out.print(L1);
+        System.out.println("\n");
+        File.save(L1,"lab1");
+        File.load(L2,"lab1");
 
     }
 }

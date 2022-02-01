@@ -49,7 +49,6 @@ public class ButtonPanel extends JPanel implements ActionListener{
         else if (source == bLoad) {
             // metoda wczytująca labirynt
             System.out.println("Wczytywanie labiryntu...");
-            FileIn f = new FileIn();
         }
         else if (source == bSave) {
             // metoda zapisująca labirynt
