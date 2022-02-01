@@ -3,7 +3,6 @@ package maze;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 import javax.swing.*;
 
@@ -50,14 +49,10 @@ public class ButtonPanel extends JPanel implements ActionListener{
         else if (source == bLoad) {
             // metoda wczytująca labirynt
             System.out.println("Wczytywanie labiryntu...");
-            FileIn fi = new FileIn("obiekt2.sav");
-            fi.getLab();
-
         }
         else if (source == bSave) {
             // metoda zapisująca labirynt
             System.out.println("Zapisywanie labiryntu...");
-            FileOut fo = new FileOut("obiekt2.sav");
 
         }
         else if (source == bSolve) {
