@@ -11,18 +11,20 @@ public class Generator {
         LEFT,
         RIGHT
     }
-
+    private Node nextNode;
+    private int x;
     private Deque<Node> stack = new ArrayDeque<>();
     private Set<Node> beenThere = new HashSet<>();
-    List<Directions> directions = new ArrayList<>();
-    List<Directions> dir = Arrays.asList(Directions.values());
+    private List<Directions> directions = new ArrayList<>();
+    private List<Directions> dir = Arrays.asList(Directions.values());
 
     public Generator(Labyrinth labyrinth){
         this.labyrinth = labyrinth;
         stack.addFirst(this.labyrinth.getBaseNode());
         RDF(this.labyrinth.getBaseNode());
+        labyrinth.setOutNote(labyrinth.nodesToString[getLabyrinth().getWidth()-1][getLabyrinth().getHeight()-1]);
     }
-    Node nextNode;
+
     public Labyrinth getLabyrinth() {
         return labyrinth;
     }
@@ -30,7 +32,6 @@ public class Generator {
     public void RDF(Node node){
         directions.removeAll(directions);
         directions.addAll(dir);
-        int x;
         while (true){
             if(directions.size()==0) {
                 if (!stack.isEmpty()) {

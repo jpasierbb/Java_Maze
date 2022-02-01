@@ -24,16 +24,16 @@ public class Labyrinth {
      * @param height
      */
     public Labyrinth(int width, int height){
-        if(width<10 || height<10){
+        if(width<5 || height<5){
             throw new WrongSizeException("Too small size of the Labyrint",width,height);
         }
         this.height = height;
         this.width = width;
         int size = width*height;
-        if(size>30){
+        if(size>=400){
             difficulty = Difficulty.HARD;
         }
-        else if(size>15){
+        else if(size>=100){
             difficulty = Difficulty.MEDIUM;
         }
         else{
@@ -50,22 +50,22 @@ public class Labyrinth {
     public Labyrinth(Difficulty difficulty){
         switch (difficulty){
             case HARD ->{
-                height=100;
-                width=100;
+                height=20;
+                width=20;
             }
             case MEDIUM -> {
-                height = 50;
-                width = 50;
+                height = 10;
+                width = 10;
             }
             case EASY -> {
-                height = 30;
-                width = 30;
+                height = 5;
+                width = 5;
             }
         }
         generateGrid();
     }
     private Node[][]  generateGrid(){
-        if(height<10 || width<10){
+        if(height<5 || width<5){
             throw new WrongSizeException("Too small size of the Labyrint",width,height);
         }
         baseNode = new Node();
@@ -223,7 +223,7 @@ public class Labyrinth {
 
     public static void main(String[] args) {
         Labyrinth L1 = new Labyrinth(10, 10);
-        Labyrinth L2 = new Labyrinth(60,10);
+        Labyrinth L2 = new Labyrinth(6,6); //Stack overflow >50x50
         Generator generator = new Generator(L2);
         L2 = generator.getLabyrinth();
         System.out.println(L2);
