@@ -1,6 +1,7 @@
 package maze;
 
 
+import javax.imageio.plugins.bmp.BMPImageWriteParam;
 import javax.lang.model.element.UnknownAnnotationValueException;
 import java.sql.SQLOutput;
 import java.util.*;
@@ -147,24 +148,33 @@ public class Labyrinth {
 
     @Override
     public String toString() {
-        for(int i = 0; i < width + 2; i++){
-            System.out.print("# ");
-        }
-        System.out.print("\n");
-        for(Node rows[]:nodesToString){
-            System.out.print("# ");
-            for(Node wall: rows){
-                int x;
-                if(!wall.isDownWall() || !wall.isLeftWall() || !wall.isUpWall() || !wall.isRightWall()) x = 1;
-                else x = 0;
-                System.out.print(x);
-                System.out.print(" ");
+        for(int h=0;h<height;h++){
+            for(int w=0;w<width;w++){
+                if(nodesToString[w][h].isUpWall()){
+                    System.out.print("*---*");
+                }else System.out.print("*   *");
             }
-            System.out.print("#");
             System.out.print("\n");
-        }
-        for(int i = 0; i < width + 2; i++){
-            System.out.print("# ");
+            for(int w=0;w<width;w++){
+                if(nodesToString[w][h].isRightWall() && nodesToString[w][h].isLeftWall()){
+                    System.out.print("|"+w+h+" |");
+                }
+                else if(nodesToString[w][h].isRightWall()){
+                    System.out.print(" "+w+h+" |");
+                }
+                else if(nodesToString[w][h].isLeftWall()){
+                    System.out.print("|"+w+h+"  ");
+                }
+                else System.out.print(" "+w+h+"  ");
+            }
+            System.out.print("\n");
+            for(int w=0;w<width;w++){
+                if(nodesToString[w][h].isDownWall()){
+                    System.out.print("*---*");
+                }
+                else System.out.print("*   *");
+            }
+            System.out.print("\n");
         }
         return "";
     }
@@ -215,8 +225,9 @@ public class Labyrinth {
 
     public static void main(String[] args) {
         Labyrinth L1 = new Labyrinth(10, 10);
-        Labyrinth L2 = new Labyrinth(Difficulty.EASY);
-        System.out.println(L2.getHeight());
-        System.out.println(L1);
+        Labyrinth L2 = new Labyrinth(10,10);
+        Generator generator = new Generator(L2);
+        L2 = generator.getLabyrinth();
+        System.out.println(L2);
     }
 }
