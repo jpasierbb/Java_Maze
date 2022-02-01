@@ -13,9 +13,10 @@ public class Generator {
     }
 
     private Deque<Node> stack = new ArrayDeque<>();
-    private Deque<Node> beenThere = new ArrayDeque<>();
+    private Set<Node> beenThere = new HashSet<>();
     List<Directions> directions = new ArrayList<>();
     List<Directions> dir = Arrays.asList(Directions.values());
+
     public Generator(Labyrinth labyrinth){
         this.labyrinth = labyrinth;
         stack.addFirst(this.labyrinth.getBaseNode());
@@ -47,7 +48,7 @@ public class Generator {
                         node.setUpWall(false);
                         nextNode.setDownWall(false);
                         stack.addFirst(nextNode);
-                        beenThere.addFirst(nextNode);
+                        beenThere.add(nextNode);
                         RDF(nextNode);
                         break;
                     }
@@ -61,7 +62,7 @@ public class Generator {
                         node.setDownWall(false);
                         nextNode.setUpWall(false);
                         stack.addFirst(nextNode);
-                        beenThere.addFirst(nextNode);
+                        beenThere.add(nextNode);
                         RDF(nextNode);
                         break;
                     }
@@ -75,7 +76,7 @@ public class Generator {
                         node.setLeftWall(false);
                         nextNode.setRightWall(false);
                         stack.addFirst(nextNode);
-                        beenThere.addFirst(nextNode);
+                        beenThere.add(nextNode);
                         RDF(nextNode);
                         break;
                     }
@@ -90,7 +91,7 @@ public class Generator {
                         node.setRightWall(false);
                         nextNode.setLeftWall(false);
                         stack.addFirst(nextNode);
-                        beenThere.addFirst(nextNode);
+                        beenThere.add(nextNode);
                         RDF(nextNode);
                         break;
                     }
