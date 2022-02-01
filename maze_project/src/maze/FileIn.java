@@ -15,7 +15,7 @@ public class FileIn {
         int i=0;
         Labyrinth lab = null;
         try {
-            inputStream = new FileInputStream("obiekty.sav");
+            inputStream = new FileInputStream("obiekt2.sav");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

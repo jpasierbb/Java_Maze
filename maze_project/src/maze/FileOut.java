@@ -9,11 +9,11 @@ import java.util.Date;
 public class FileOut {
 
     public static void main (String[] args) {
-        Labyrinth l = new Labyrinth(30,30);
+        Labyrinth l = new Labyrinth(12,12);
 
         FileOutputStream outputStream = null;
         try {
-            outputStream = new FileOutputStream("obiekty.sav");
+            outputStream = new FileOutputStream("obiekt2.sav");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
