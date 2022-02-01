@@ -110,6 +110,7 @@ public class Generator {
             Labyrinth l1 = new Labyrinth(Labyrinth.Difficulty.EASY);
             Generator generator = new Generator(l1);
             l1 = generator.getLabyrinth();
+            Labyrinth l2 = new Labyrinth(Labyrinth.Difficulty.MEDIUM);
             System.out.println(l1.getBaseNode());
             System.out.println(l1.getBaseNode().getRightNext());
             System.out.println(l1.getBaseNode().getDownNext());
