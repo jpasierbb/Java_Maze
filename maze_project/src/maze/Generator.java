@@ -11,37 +11,35 @@ public class Generator {
         LEFT,
         RIGHT
     }
+
     private Deque<Node> stack = new ArrayDeque<>();
     private Deque<Node> beenThere = new ArrayDeque<>();
     List<Directions> directions = new ArrayList<>();
+    List<Directions> dir = Arrays.asList(Directions.values());
     public Generator(Labyrinth labyrinth){
         this.labyrinth = labyrinth;
         stack.addFirst(this.labyrinth.getBaseNode());
         RDF(this.labyrinth.getBaseNode());
     }
-
+    Node nextNode;
     public Labyrinth getLabyrinth() {
         return labyrinth;
     }
 
     public void RDF(Node node){
         directions.removeAll(directions);
-        directions.addAll(Arrays.asList(Directions.values()));
-        Node nextNode;
+        directions.addAll(dir);
         int x;
         while (true){
             if(directions.size()==0) {
                 if (!stack.isEmpty()) {
                     RDF(stack.pop());
                     break;
-                } else break;
+                } else {
+                    break;
+                }
             }
-            else if (directions.size()==1){
-                x = 0;
-            }
-            else {
-                x = random.nextInt(directions.size()-1);
-            }
+            x = random.nextInt(100)%directions.size();
             switch (directions.get(x)){
                 case UP -> {
                     if(node.getUpNext()!=null && !beenThere.contains(node.getUpNext()) ){

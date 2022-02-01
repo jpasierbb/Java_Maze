@@ -18,18 +18,6 @@ public class Labyrinth {
         MEDIUM,
         EASY
     }
-    //Do wywalenia
-    public enum Algorithm {
-        RANDOMIZED_DEPTH__FIRST,
-        OTHER_ALG;
-        private Deque<Node> stack = new ArrayDeque<>();
-        private void generate(Labyrinth labyrinth){
-            Node node = labyrinth.baseNode;
-
-        }
-
-    }
-
     /**
      * Constructor to make the Labyrint with given height and width. Difficulty is being set according to size.
      * @param width
@@ -42,10 +30,10 @@ public class Labyrinth {
         this.height = height;
         this.width = width;
         int size = width*height;
-        if(size>100){
+        if(size>30){
             difficulty = Difficulty.HARD;
         }
-        else if(size>50){
+        else if(size>15){
             difficulty = Difficulty.MEDIUM;
         }
         else{
@@ -157,15 +145,28 @@ public class Labyrinth {
             System.out.print("\n");
             for(int w=0;w<width;w++){
                 if(nodesToString[w][h].isRightWall() && nodesToString[w][h].isLeftWall()){
-                    System.out.print("|"+w+h+" |");
+                    if(nodesToString[w][h]==baseNode || nodesToString[w][h]==outNote){
+                        System.out.print("| X |");
+                    }else System.out.print("|   |");
+
                 }
                 else if(nodesToString[w][h].isRightWall()){
-                    System.out.print(" "+w+h+" |");
+                    if(nodesToString[w][h]==baseNode || nodesToString[w][h]==outNote){
+                        System.out.print("  X |");
+                    }else System.out.print("    |");
+
                 }
                 else if(nodesToString[w][h].isLeftWall()){
-                    System.out.print("|"+w+h+"  ");
+                    if(nodesToString[w][h]==baseNode || nodesToString[w][h]==outNote){
+                        System.out.print("| X  ");
+                    }else System.out.print("|    ");
+
                 }
-                else System.out.print(" "+w+h+"  ");
+                else {
+                    if(nodesToString[w][h]==baseNode || nodesToString[w][h]==outNote){
+                        System.out.print("  X  ");
+                    }else System.out.print("     ");
+                }
             }
             System.out.print("\n");
             for(int w=0;w<width;w++){
@@ -212,22 +213,20 @@ public class Labyrinth {
     public Node getOutNote() {
         return outNote;
     }
-    public void generate(Algorithm algorithm){
-        switch (algorithm){
-            case RANDOMIZED_DEPTH__FIRST -> rdf_alg();
-            case OTHER_ALG -> rdf_alg();
-        }
+
+    public void setOutNote(Node outNote) {
+        this.outNote = outNote;
     }
     // Raczej idziemy w strone klasy zagniezdzonej generator z wlasnym stackiem i wywolaniem rekurencyjnym algorytmu
-    private void rdf_alg() {
-    }
+
 
 
     public static void main(String[] args) {
         Labyrinth L1 = new Labyrinth(10, 10);
-        Labyrinth L2 = new Labyrinth(10,10);
+        Labyrinth L2 = new Labyrinth(60,10);
         Generator generator = new Generator(L2);
         L2 = generator.getLabyrinth();
         System.out.println(L2);
+        System.out.print(L2.baseNode.equals(L2.outNote));
     }
 }
