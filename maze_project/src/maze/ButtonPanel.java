@@ -13,7 +13,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
     public static final int HEIGHT = 300;
     public static final int WIDTH = 500;
     JButton bGenerateAB, bGenerateDF, bLoad, bSave, bSolve, bExit, bGenerateSmall, bGenerateMedium, bGenerateBig;
-
+    Labyrinth L1 = new Labyrinth(Labyrinth.Difficulty.MEDIUM);
     public ButtonPanel() {
         bGenerateAB = new JButton("Print MAZE by AB");
         bGenerateDF = new JButton("Print MAZE by DF");
@@ -50,7 +50,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
 
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
-        Labyrinth L1 = new Labyrinth(Labyrinth.Difficulty.EASY);
+
 
 
         if (source == bGenerateSmall) {
@@ -78,6 +78,7 @@ public class ButtonPanel extends JPanel implements ActionListener{
             // metoda generująca labirynt
             System.out.println("PRINTING DF...");
             GeneratorDeepFirst GL1 = new GeneratorDeepFirst(L1);
+            L1 = GL1.getLabyrinth();
             L1.toString();
             System.out.println("\n");
         }
@@ -91,8 +92,6 @@ public class ButtonPanel extends JPanel implements ActionListener{
         else if (source == bSave) {
             // metoda zapisująca labirynt
             System.out.println("Zapisywanie labiryntu...");
-            GeneratorDeepFirst GL1 = new GeneratorDeepFirst(L1);
-            L1 = GL1.getLabyrinth();
             File.save(L1, "maze.sav");
 
         }
